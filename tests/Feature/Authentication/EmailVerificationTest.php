@@ -12,6 +12,8 @@ use Tests\TestCase;
 
 class EmailVerificationTest extends TestCase
 {
+    use RefreshDatabase; 
+    
     public function test_user_can_verify_their_email()
     {
         $user = User::factory()->create([

@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class ForgotPasswordTest extends TestCase
 {
+    use RefreshDatabase;
+    
     public function test_user_can_request_a_password_reset_link()
     {
         $user = User::factory()->create();
