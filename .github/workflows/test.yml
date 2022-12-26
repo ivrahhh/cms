@@ -23,7 +23,7 @@ jobs:
       run: php -r "file_exists('.env') || copy('.env.testing','.env');"
     
     - name: Install PHP Dependencies
-      run: composer required --no-scripts
+      run: composer require --no-scripts
     
     - name: Install Node Packages
       run: npm install
