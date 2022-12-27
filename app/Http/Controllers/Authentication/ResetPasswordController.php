@@ -17,7 +17,10 @@ class ResetPasswordController extends Controller
 {
     public function edit(Request $request) : View
     {
-        return view();
+        return view('pages.auth.reset-password', [
+            'token' => $request->token,
+            'email' => $request->email,
+        ]);
     }
 
     public function update(ResetPasswordRequest $request) : RedirectResponse

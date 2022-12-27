@@ -48,4 +48,23 @@ class EmailVerificationTest extends TestCase
 
         Event::assertDispatched(Verified::class);
     }
+
+    public function test_user_cannot_verify_their_email_with_expired_verification_link()
+    {
+        $user = User::factory()->create([
+            'email_verified_at' => null,
+        ]);
+
+        $url = URL::temporarySignedRoute('verification.verify', now()->subHour(), [
+            'id' => $user->id,
+            'hash' => sha1($user->email),
+        ]);
+
+        $response = $this->actingAs($user)->get($url);
+        $response->assertStatus(403);
+
+        $this->assertFalse(
+            $user->fresh()->hasVerifiedEmail(),
+        );
+    }
 }
