@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Content\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware(['auth','verified'])->group(function() {
+    Route::resource('posts', PostController::class);
 });
